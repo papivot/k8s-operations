@@ -1,0 +1,177 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: k8s-operations
+  namespace: kube-ops
+  labels:
+    project.lob: gts
+    project.vsad: go0v
+    project.name: k8s-operations
+    project.app: k8s-operations
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: k8s-operations
+  labels:
+    project.lob: gts
+    project.vsad: go0v
+    project.app: k8s-operations
+    project.name: k8s-operations
+rules:
+  - apiGroups:
+    - '*'
+    resources:
+    - '*'
+    verbs: ["get", "list", "watch"]
+  - nonResourceURLs:
+    - '*'
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: k8s-operations
+  labels:
+    project.lob: gts
+    project.vsad: go0v
+    project.app: k8s-operations
+    project.name: k8s-operations
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: k8s-operations
+subjects:
+- kind: ServiceAccount
+  name: k8s-operations
+  namespace: kube-ops
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    prometheus.io/scrape: 'true'
+  labels:
+    project.lob: gts
+    project.vsad: go0v
+    project.app: k8s-operations
+    project.name: k8s-operations
+  name: k8s-operations
+  namespace: kube-ops
+spec:
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: 8080
+  selector:
+    project.app: k8s-operations
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/custom-response-headers: 'Strict-Transport-Security: max-age=31536000;
+      includeSubDomains'
+    kubernetes.io/ingress.class: traefik
+    traefik.frontend.rule.type: PathPrefixStrip
+  labels:
+    project.name: k8s-operations
+    project.app: k8s-operations
+    project.lob: gts
+    project.vsad: go0v
+  name: k8s-operations
+  namespace: kube-ops
+spec:
+  rules:
+  - host: gts.aws-us-east-1c-green-v1-10.kube-np.ebiz.verizon.com
+    http:
+      paths:
+      - backend:
+          serviceName: k8s-operations
+          servicePort: 80
+        path: /k8oper
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  labels:
+    project.name: k8s-operations
+    project.app: k8s-operations
+    project.lob: gts
+    project.vsad: go0v
+  name: k8s-operations
+  namespace: kube-ops
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      project.app: k8s-operations
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        project.app: k8s-operations
+        project.lob: gts
+        project.vsad: go0v
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kube.verizon.com/node-role
+                operator: In
+                values:
+                - infrastructure
+      containers:
+      - env:
+        - name: CLUSTER_NAME
+          value: gts.aws-us-east-1c-green-v1-10.kube-np.ebiz.verizon.com
+        image: oneartifactory.verizon.com:8091/gts/go0v/alpine_test:1.1.17
+        imagePullPolicy: IfNotPresent
+        name: k8s-operations
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          allowPrivilegeEscalation: false
+          privileged: false
+          runAsNonRoot: false
+          #runAsNonRoot: true
+          #runAsUser: 9999
+        volumeMounts:
+        - mountPath: /user/k8soper
+          name: cache-volume
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        stdin: true
+        tty: true
+      volumes:
+      - name: cache-volume
+        emptyDir: {}
+      dnsPolicy: ClusterFirst
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: k8s-operations
+      serviceAccountName: k8s-operations
+      terminationGracePeriodSeconds: 30
+      tolerations:
+      - effect: NoSchedule
+        key: kube.verizon.com/node-role
+        value: infrastructure
