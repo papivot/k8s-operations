@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Namespace
 metadata:
   name: default
+#Assuming sidecar insertion is enabled in default namespace.
   labels:
     project.name: k8s-operations
     project.app: k8s-operations
