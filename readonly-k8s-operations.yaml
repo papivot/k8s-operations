@@ -74,7 +74,7 @@ metadata:
   namespace: kube-ops
 spec:
   rules:
-  - host: gts.aws-us-east-1c-green-v1-10.kube-np.ebiz.verizon.com
+  - host: cluster0.aws-us-east-1c-green-v1-10.kube-np.subdomain.domain.com
     http:
       paths:
       - backend:
@@ -120,8 +120,8 @@ spec:
       containers:
       - env:
         - name: CLUSTER_NAME
-          value: gts.aws-us-east-1c-green-v1-10.kube-np.ebiz.verizon.com
-        image: oneartifactory.verizon.com:8091/gts/go0v/alpine_test:1.1.17
+          value: cluster0.aws-us-east-1c-green-v1-10.kube-np.subdomain.domain.com
+        image: harbor.subdomain.com:8091/gts/go0v/alpine_test:1.1.17
         imagePullPolicy: IfNotPresent
         name: k8s-operations
         ports:
@@ -159,5 +159,5 @@ spec:
       terminationGracePeriodSeconds: 30
       tolerations:
       - effect: NoSchedule
-        key: kube.verizon.com/node-role
+        key: kube.domain.com/node-role
         value: infrastructure
