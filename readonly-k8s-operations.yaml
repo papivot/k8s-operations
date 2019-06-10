@@ -4,8 +4,6 @@ metadata:
   name: k8s-operations
   namespace: kube-ops
   labels:
-    project.lob: gts
-    project.vsad: go0v
     project.name: k8s-operations
     project.app: k8s-operations
 ---
@@ -14,8 +12,6 @@ kind: ClusterRole
 metadata:
   name: k8s-operations
   labels:
-    project.lob: gts
-    project.vsad: go0v
     project.app: k8s-operations
     project.name: k8s-operations
 rules:
@@ -33,8 +29,6 @@ kind: ClusterRoleBinding
 metadata:
   name: k8s-operations
   labels:
-    project.lob: gts
-    project.vsad: go0v
     project.app: k8s-operations
     project.name: k8s-operations
 roleRef:
@@ -52,8 +46,6 @@ metadata:
   annotations:
     prometheus.io/scrape: 'true'
   labels:
-    project.lob: gts
-    project.vsad: go0v
     project.app: k8s-operations
     project.name: k8s-operations
   name: k8s-operations
@@ -78,8 +70,6 @@ metadata:
   labels:
     project.name: k8s-operations
     project.app: k8s-operations
-    project.lob: gts
-    project.vsad: go0v
   name: k8s-operations
   namespace: kube-ops
 spec:
@@ -98,8 +88,6 @@ metadata:
   labels:
     project.name: k8s-operations
     project.app: k8s-operations
-    project.lob: gts
-    project.vsad: go0v
   name: k8s-operations
   namespace: kube-ops
 spec:
@@ -119,8 +107,6 @@ spec:
       creationTimestamp: null
       labels:
         project.app: k8s-operations
-        project.lob: gts
-        project.vsad: go0v
     spec:
       affinity:
         nodeAffinity:
