@@ -74,7 +74,7 @@ metadata:
   namespace: kube-ops
 spec:
   rules:
-  - host: cluster0.aws-us-east-1c-green-v1-10.kube-np.subdomain.domain.com
+  - host: cluster0.subdomain.domain.com
     http:
       paths:
       - backend:
@@ -113,15 +113,15 @@ spec:
           requiredDuringSchedulingIgnoredDuringExecution:
             nodeSelectorTerms:
             - matchExpressions:
-              - key: kube.verizon.com/node-role
+              - key: myrole.com/node-role
                 operator: In
                 values:
                 - infrastructure
       containers:
       - env:
         - name: CLUSTER_NAME
-          value: cluster0.aws-us-east-1c-green-v1-10.kube-np.subdomain.domain.com
-        image: harbor.subdomain.com:8091/gts/go0v/alpine_test:1.1.17
+          value: cluster0.subdomain.domain.com
+        image: harbor.subdomain.com:/k8s.0.0.1
         imagePullPolicy: IfNotPresent
         name: k8s-operations
         ports:
