@@ -111,6 +111,12 @@ spec:
           requests:
             cpu: 50m
             memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: /itam.txt
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
