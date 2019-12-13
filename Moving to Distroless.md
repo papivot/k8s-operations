@@ -101,20 +101,20 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 ```
 * `1`. We start with a temporary/build image - python:3-slim - that has all the relevant shell and Python3 package manager installed. Call it the `build-env`.
 * `2`. Create the necessary **directory structure** where to copy the app binaries or where the app would be creating files. 
-* `3. .. 6`. Copy the app scripts/files to the temp image. 
-* `7. .. 10`. Mark the files executable. Not sure if this is needed??? May be required (TBD)
-* `11. .. 13`. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
-* `15. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
-* 16. ... 17. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
-* 18. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
-*  19. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
-* 20. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
-* 21. Default home directory of `nonroot` is `/home/nonroot`. Since our application needs to work in `/user/k8soper` set the `WORKDIR` accordingly. 
-* 22. Expose the port 8080. 
-* 23.   Distroless images by default do not contain a shell. That means the Dockerfile `ENTRYPOINT` command, when defined, must be specified in `vector` form, to avoid the container runtime prefixing with a shell. For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form
+* `3 .. 6`. Copy the app scripts/files to the temp image. 
+* `7 .. 10`. Mark the files executable. Not sure if this is needed??? May be required (TBD)
+* `11 .. 13`. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
+* `15`. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
+* `16`. ... 17. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
+* `18`. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
+*  `19`. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
+* `20`. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
+* `21`. Default home directory of `nonroot` is `/home/nonroot`. Since our application needs to work in `/user/k8soper` set the `WORKDIR` accordingly. 
+* `22`. Expose the port 8080. 
+* `23`.   Distroless images by default do not contain a shell. That means the Dockerfile `ENTRYPOINT` command, when defined, must be specified in `vector` form, to avoid the container runtime prefixing with a shell. For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form.  Also, since we cannot provide a shell command, as per the docker 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTQyNDA2NTU1MiwxODIxNjU5NzY1LDE4MD
-UxNTkyNDNdfQ==
+eyJoaXN0b3J5IjpbLTE2NzI2OTkxMzUsMTgyMTY1OTc2NSwxOD
+A1MTU5MjQzXX0=
 -->
