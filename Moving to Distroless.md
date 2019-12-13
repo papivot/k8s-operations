@@ -107,10 +107,11 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 16. ... 17. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
 * 18. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
 *  19. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
-* 20. By default, distroless onl
+* 20. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
+* 21. Default home directory of  
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTcxMjY2MjgyMCwxODIxNjU5NzY1LDE4MD
+eyJoaXN0b3J5IjpbMjEwMjExOTYxNSwxODIxNjU5NzY1LDE4MD
 UxNTkyNDNdfQ==
 -->
