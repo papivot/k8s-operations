@@ -106,10 +106,11 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 15. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
 * 16. ... 17. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
 * 18. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
-*  19. Optional - if using a non-standard package path (default is 
+*  19. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
+* 20. By default, distroless onl
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NTYxNDg3MzEsMTgyMTY1OTc2NSwxOD
-A1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMTcxMjY2MjgyMCwxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
