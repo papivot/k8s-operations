@@ -69,7 +69,7 @@ While there can be further modifications and simplifications to the above Docker
 ---
 ## Distroless build
 
-While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`. These requirements have to be achieved by  using a stepped build. 
+While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`, `pip`. These requirements have to be achieved by  using a stepped build. 
 
 The new Dockerfile (with line numbers for reference below) that was used is as follows - 
 
@@ -105,9 +105,10 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 11. ... 13. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
 * 15. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
 * 16. ... 17. Copy the relevent files/directory structure from the `build-env` to the distroless image. 
+* 18. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODA1NDg0NzYsMTgyMTY1OTc2NSwxODA1MT
-U5MjQzXX0=
+eyJoaXN0b3J5IjpbMTQzNDg3NzE1MywxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
