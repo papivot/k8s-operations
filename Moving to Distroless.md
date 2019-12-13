@@ -39,7 +39,32 @@ The application consists of the following files -
 
 ## Alpine build
 
-The following Dockerfile was used to build an
+The following Dockerfile was used to build an Alpine based Docker image - 
+```shell
+FROM alpine:latest
+RUN apk update \
+    && apk add python3 \
+    && pip3 install schedule \
+    && pip3 install kubernetes \
+    && rm -rf /var/cache/apk/*
+RUN mkdir -p /usr/local/bin && mkdir -p /user/k8soper
+
+ENV HOME=/user/k8soper
+ADD ./exportjson.py /usr/local/bin/exportjson.py
+ADD ./dockerrun.sh /usr/local/bin/dockerrun.sh
+ADD ./runhttp.py /usr/local/bin/runhttp.py
+
+RUN chmod +x /usr/local/bin/runhttp.py \
+ && chmod +x /usr/local/bin/exportjson.py \
+ && chmod +x /usr/local/bin/dockerrun.sh
+
+RUN adduser k8soper -Du 9999 -h /user/k8soper
+USER k8soper
+WORKDIR /user/k8soper
+EXPOSE 8080
+CMD ["/usr/local/bin/dockerrun.sh"]
+
+```
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTE4MTM3NDcyMywxODA1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMjA3MjYwNDAwNywxODA1MTU5MjQzXX0=
 -->
