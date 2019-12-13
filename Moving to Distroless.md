@@ -98,14 +98,15 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
  22 EXPOSE 8080
  23 CMD ["/usr/local/bin/execdockerrun.py"]
 ```
-* 1. We start with a temporary/build image - python:3-slim - that has all the relevent shell and Python package manager installed. Call it the `build-env`.
+* 1. We start with a temporary/build image - python:3-slim - that has all the relevant shell and Python3 package manager installed. Call it the `build-env`.
 * 2. Create the necessary **directory structure** where to copy the app binaries or where the app would be creating files. 
 * 3. .. 6. Copy the app scripts/files to the temp image. 
 * 7. ... 10. Mark the files executable. Not sure if this is needed??? May be required (TBD)
-* 11. ... 13. Run PIP to download and install the relevent Python 
+* 11. ... 13. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
+* 15. Now that the build enviornment is  
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTY5MDY3ODAxOCwxODIxNjU5NzY1LDE4MD
+eyJoaXN0b3J5IjpbMjExODU1NDA2OSwxODIxNjU5NzY1LDE4MD
 UxNTkyNDNdfQ==
 -->
