@@ -103,10 +103,10 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 3. .. 6. Copy the app scripts/files to the temp image. 
 * 7. ... 10. Mark the files executable. Not sure if this is needed??? May be required (TBD)
 * 11. ... 13. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
-* 15. Now that the build enviornment is  
+* 15. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided here.
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjExODU1NDA2OSwxODIxNjU5NzY1LDE4MD
-UxNTkyNDNdfQ==
+eyJoaXN0b3J5IjpbLTE4NTc1NDI2OTMsMTgyMTY1OTc2NSwxOD
+A1MTU5MjQzXX0=
 -->
