@@ -69,7 +69,8 @@ While there can be further modifications and simplifications to the above Docker
 ---
 ## Distroless build
 
-While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`, `pip`. These requirements have to be achieved by  using a stepped build. 
+While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`, `pip`. These requirements have to be achieved by  using a [multi-staged build](https://docs.docker.com/develop/develop-images/multistage-build/). 
+Multi-Stage builds allow you to `build` the program in one container image, and copy over only the artifacts required from the first container image to a target image, which is what is used to run your program.
 
 The new Dockerfile (with line numbers for reference below) that was used is as follows - 
 
@@ -114,6 +115,6 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbNzYwMzk4MDk2LDE4MjE2NTk3NjUsMTgwNT
-E1OTI0M119
+eyJoaXN0b3J5IjpbLTE5Mjk2NTg2MjUsMTgyMTY1OTc2NSwxOD
+A1MTU5MjQzXX0=
 -->
