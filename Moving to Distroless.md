@@ -67,8 +67,10 @@ CMD ["/usr/local/bin/dockerrun.sh"]
 While there can be further modifications and simplifications to the above Dockerfile (feedbacks welcome), this does the job and build an image that is approx. 30MB in size. Unfortunately, Alpine provides a bunch of packages besides the ones required to run the image. All these need to be maintained and updated regularly. 
 
 ---
-## Distroless build.
+## Distroless build
+
+While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Docker 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIwMTYyNzYxMjgsMTgyMTY1OTc2NSwxOD
-A1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMTMxMjkwODE4NywxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
