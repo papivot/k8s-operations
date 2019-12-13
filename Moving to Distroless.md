@@ -64,7 +64,7 @@ WORKDIR /user/k8soper
 EXPOSE 8080
 CMD ["/usr/local/bin/dockerrun.sh"]
 ```
-
+While there can be further modifications and simplifications to the above Dockerfile (feedbacks welcome), this does the job and build an image that is approx 30MB in size. 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA2MDczNTM2MywxODA1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbLTE4NTE1NzkxMzYsMTgwNTE1OTI0M119
 -->
