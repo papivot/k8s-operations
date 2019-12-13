@@ -32,8 +32,14 @@ The application consists of the following files -
  - `exportjson.py` - Python file that is executed, every 3 minutes, to generate a JSON dump of the container information of all the PODs in a K8S cluster. 
  - `dockerrun.sh` - A wrapper shell script that runs the two Python scripts. 
  ```shell
+ #!/bin/sh
+/usr/local/bin/runhttp.py &
+/usr/local/bin/exportjson.py
 ```
 
+## Alpine build
+
+The following Dockerfile was used to build an
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbODg0NTQzODcsMTgwNTE1OTI0M119
+eyJoaXN0b3J5IjpbMTE4MTM3NDcyMywxODA1MTU5MjQzXX0=
 -->
