@@ -64,7 +64,7 @@ WORKDIR /user/k8soper
 EXPOSE 8080
 CMD ["/usr/local/bin/dockerrun.sh"]
 ```
-While there can be further modifications and simplifications to the above Dockerfile (feedbacks welcome), this does the job and build an image that is approx 30MB in size. Unfortunately, A
+While there can be further modifications and simplifications to the above Dockerfile (feedbacks welcome), this does the job and build an image that is approx. 30MB in size. Unfortunately, Alpine provides a bunch of packages besides the ones required to run the image. All these need to be maintained and updated regularly. 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTIzMTAyMDI3NywxODA1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMTgyMTY1OTc2NSwxODA1MTU5MjQzXX0=
 -->
