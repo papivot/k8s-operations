@@ -111,10 +111,11 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * `20`. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
 * `21`. Default home directory of `nonroot` is `/home/nonroot`. Since our application needs to work in `/user/k8soper` set the `WORKDIR` accordingly. 
 * `22`. Expose the port 8080. 
-* `23`.   Distroless images by default do not contain a shell. That means the Dockerfile `ENTRYPOINT` command, when defined, must be specified in `vector` form, to avoid the container runtime prefixing with a shell. For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form.  Also, since we cannot provide a shell command, as per the docker 
+* `23`.   Distroless images by default do not contain a shell. That means the Dockerfile `ENTRYPOINT` command, when defined, must be specified in `vector` form, to avoid the container runtime prefixing with a shell. For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form.  Also, since we cannot provide a shell command, as per the Alpine Dockerfile, a simple Python wrapper was written to execute the two Python scripts - `/usr/local/bin/runhttp.py` and `/usr/local/bin/exportjson.py`.
+
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE2NzI2OTkxMzUsMTgyMTY1OTc2NSwxOD
+eyJoaXN0b3J5IjpbLTE0OTA5MjEwNjAsMTgyMTY1OTc2NSwxOD
 A1MTU5MjQzXX0=
 -->
