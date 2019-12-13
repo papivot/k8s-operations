@@ -108,10 +108,12 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 18. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
 *  19. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
 * 20. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
-* 21. Default home directory of  
+* 21. Default home directory of `nonroot` is `/home/nonroot`. Since our application needs to work in `/user/k8soper` set the `WORKDIR` accordingly. 
+* 22. Expose the port 8080. 
+* 23.   
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjEwMjExOTYxNSwxODIxNjU5NzY1LDE4MD
-UxNTkyNDNdfQ==
+eyJoaXN0b3J5IjpbNzYwMzk4MDk2LDE4MjE2NTk3NjUsMTgwNT
+E1OTI0M119
 -->
