@@ -113,9 +113,10 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * `22`. Expose the port 8080. 
 * `23`.   Distroless images by default do not contain a shell. That means the Dockerfile `ENTRYPOINT` command, when defined, must be specified in `vector` form, to avoid the container runtime prefixing with a shell. For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form.  Also, since we cannot provide a shell command, as per the Alpine Dockerfile, a simple Python wrapper was written to execute the two Python scripts - `/usr/local/bin/runhttp.py` and `/usr/local/bin/exportjson.py`.
 
+Building the image was straightforward and build an 80MB image. Intrestingly, there were no changes that had to be made to the K8s deployment yaml. 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE0OTA5MjEwNjAsMTgyMTY1OTc2NSwxOD
-A1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMTE3NTQzNzA4OCwxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
