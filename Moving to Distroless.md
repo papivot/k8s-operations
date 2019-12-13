@@ -105,7 +105,7 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * `7 .. 10`. Mark the files executable. Not sure if this is needed??? May be required (TBD)
 * `11 .. 13`. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
 * `15`. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
-* `16`. ... 17. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
+* `16 .. 17`. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
 * `18`. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
 *  `19`. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
 * `20`. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
