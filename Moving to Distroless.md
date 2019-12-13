@@ -39,7 +39,7 @@ The application consists of the following files -
 
 ## Alpine build
 
-The following Dockerfile was used to build an Alpine based Docker image - 
+The following standard Dockerfile was used to build an Alpine based Docker image - 
 ```shell
 FROM alpine:latest
 RUN apk update \
@@ -71,7 +71,7 @@ While there can be further modifications and simplifications to the above Docker
 
 While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`. These requirements have to be achieved by  using a stepped build. 
 
-The new Dockerfile that was used is as follows - 
+The new Dockerfile (with line numbers for reference below) that was used is as follows - 
 
 ```shell
   1 FROM python:3-slim AS build-env
@@ -98,8 +98,10 @@ The new Dockerfile that was used is as follows -
  22 EXPOSE 8080
  23 CMD ["/usr/local/bin/execdockerrun.py"]
 ```
+* 1. 
+
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTY1OTk2ODQ4NSwxODIxNjU5NzY1LDE4MD
-UxNTkyNDNdfQ==
+eyJoaXN0b3J5IjpbOTE0MjkxNzA1LDE4MjE2NTk3NjUsMTgwNT
+E1OTI0M119
 -->
