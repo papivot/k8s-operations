@@ -1,24 +1,23 @@
-FROM alpine:latest
-RUN apk update \
-    && apk add python3 \
+FROM python:3-slim AS build-env
+RUN mkdir -p /app && mkdir -p /user/k8soper
+ADD ./exportjson.py /app/exportjson.py
+ADD ./dockerrun.sh /app/dockerrun.sh
+ADD ./runhttp.py /app/runhttp.py
+ADD ./execdockerrun.py /app/execdockerrun.py
+RUN chmod +x /app/dockerrun.sh \
+ && chmod +x /app/runhttp.py \
+ && chmod +x /app/exportjson.py \
+ && chmod +x /app/execdockerrun.py
+RUN pip3 install --upgrade pip \
     && pip3 install schedule \
-    && pip3 install kubernetes \
-    && rm -rf /var/cache/apk/*
-RUN mkdir -p /usr/local/bin && mkdir -p /user/k8soper
+    && pip3 install kubernetes
 
-ENV HOME=/user/k8soper
-ADD ./dumpconfig.sh /usr/local/bin/dumpconfig.sh
-ADD ./exportjson.py /usr/local/bin/exportjson.py
-ADD ./dockerrun.sh /usr/local/bin/dockerrun.sh
-ADD ./runhttp.py /usr/local/bin/runhttp.py
-
-RUN chmod +x /usr/local/bin/dumpconfig.sh \
-	&& chmod +x /usr/local/bin/runhttp.py \
-	&& chmod +x /usr/local/bin/exportjson.py \
-	&& chmod +x /usr/local/bin/dockerrun.sh 
-
-RUN adduser k8soper -Du 9999 -h /user/k8soper
-USER k8soper
+FROM gcr.io/distroless/python3
+COPY --from=build-env /user /user
+COPY --from=build-env /app /usr/local/bin
+COPY --from=build-env /usr/local/lib/python3.8/site-packages /usr/lib/python3.5/site-packages
+ENV PYTHONPATH=/usr/lib/python3.5/site-packages
+USER nonroot
 WORKDIR /user/k8soper
 EXPOSE 8080
-CMD ["/usr/local/bin/dockerrun.sh"]
+CMD ["/usr/local/bin/execdockerrun.py"]
