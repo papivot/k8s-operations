@@ -29,8 +29,11 @@ My Python application uses the [Kubernetes-python client libraries](https://gith
 The application consists of the following files -
 
  - `runhttp.py` - Python file to run a simple web server on port 80 in the background.
- - `exportjson.py` - Python file that is executed, every 3 minutes, to generate a JSON dump of the c
+ - `exportjson.py` - Python file that is executed, every 3 minutes, to generate a JSON dump of the container information of all the PODs in a K8S cluster. 
+ - `dockerrun.sh` - A wrapper shell script that runs the two Python scripts. 
+ ```shell
+```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM2MTYyODYzOSwxODA1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbODg0NTQzODcsMTgwNTE1OTI0M119
 -->
