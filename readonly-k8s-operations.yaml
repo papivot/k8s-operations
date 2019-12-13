@@ -120,8 +120,8 @@ spec:
       containers:
       - env:
         - name: CLUSTER_NAME
-          value: cluster0.subdomain.domain.com
-        image: harbor.subdomain.com:/k8s.0.0.1
+          value: clustername.demo.local 
+        image: harbor.subdomain.com:/k8soper:0.0.7
         imagePullPolicy: IfNotPresent
         name: k8s-operations
         ports:
@@ -141,6 +141,12 @@ spec:
           runAsNonRoot: false
           #runAsNonRoot: true
           #runAsUser: 9999
+        readinessProbe:
+          httpGet:
+            path: /itam.txt
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
         volumeMounts:
         - mountPath: /user/k8soper
           name: cache-volume

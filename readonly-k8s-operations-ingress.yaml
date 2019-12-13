@@ -97,7 +97,7 @@ spec:
       - env:
         - name: CLUSTER_NAME
           value: navneet.cfcr.demo 
-        image: whoami6443/k8soper:0.0.6
+        image: whoami6443/k8soper:0.0.7
         imagePullPolicy: IfNotPresent
         name: k8s-operations
         ports:
@@ -110,6 +110,12 @@ spec:
           requests:
             cpu: 50m
             memory: 64Mi
+        readinessProbe:
+          httpGet:
+            path: /itam.txt
+            port: 8080
+          initialDelaySeconds: 10
+          periodSeconds: 10
         securityContext:
           readOnlyRootFilesystem: true
           allowPrivilegeEscalation: false
