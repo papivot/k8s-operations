@@ -99,12 +99,12 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
  22 EXPOSE 8080
  23 CMD ["/usr/local/bin/execdockerrun.py"]
 ```
-* 1. We start with a temporary/build image - python:3-slim - that has all the relevant shell and Python3 package manager installed. Call it the `build-env`.
-* 2. Create the necessary **directory structure** where to copy the app binaries or where the app would be creating files. 
-* 3. .. 6. Copy the app scripts/files to the temp image. 
-* 7. ... 10. Mark the files executable. Not sure if this is needed??? May be required (TBD)
-* 11. ... 13. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
-* 15. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
+* `1`. We start with a temporary/build image - python:3-slim - that has all the relevant shell and Python3 package manager installed. Call it the `build-env`.
+* `2`. Create the necessary **directory structure** where to copy the app binaries or where the app would be creating files. 
+* `3. .. 6`. Copy the app scripts/files to the temp image. 
+* `7. .. 10`. Mark the files executable. Not sure if this is needed??? May be required (TBD)
+* `11. .. 13`. Run PIP to download and install the relevant Python3 packages to the known location in the build env. 
+* `15. Now that the build environment is ready/prepared, we get the relevant distroless Docker image from gcr.io. The links/details are provided [here.](https://github.com/GoogleContainerTools/distroless)
 * 16. ... 17. Copy the relevant files/directory structure(s) from the `build-env` to the distroless image. 
 * 18. Copy the pip packages from the `build-env` to the relevant folder in the distroless image.  
 *  19. Optional - if using a non-standard site-package path (default is /usr/local/lib/python{version}/site-packages) set the `PYTHONPATH` env variable. 
@@ -115,6 +115,6 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTc5Mjg2OTg2LDE4MjE2NTk3NjUsMTgwNT
-E1OTI0M119
+eyJoaXN0b3J5IjpbMTQyNDA2NTU1MiwxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
