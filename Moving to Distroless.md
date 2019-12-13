@@ -101,10 +101,11 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 1. We start with a temporary/build image - python:3-slim - that has all the relevent shell and Python package manager installed. Call it the `build-env`.
 * 2. Create the necessary **directory structure** where to copy the app binaries or where the app would be creating files. 
 * 3. .. 6. Copy the app scripts/files to the temp image. 
-* 7. ... 10. Mark the files executable. 
+* 7. ... 10. Mark the files executable. Not sure if this is needed??? May be required (TBD)
+* 11. ... 13. Run PIP to download and install the relevent Python 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTU4NjQ2MDU5NCwxODIxNjU5NzY1LDE4MD
+eyJoaXN0b3J5IjpbLTY5MDY3ODAxOCwxODIxNjU5NzY1LDE4MD
 UxNTkyNDNdfQ==
 -->
