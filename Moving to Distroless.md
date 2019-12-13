@@ -69,8 +69,8 @@ While there can be further modifications and simplifications to the above Docker
 ---
 ## Distroless build
 
-While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Docker 
+While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`. These requirements have to be modified by  using a stepped build. 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMTMxMjkwODE4NywxODIxNjU5NzY1LDE4MD
-UxNTkyNDNdfQ==
+eyJoaXN0b3J5IjpbLTE4ODQ4MjYyODQsMTgyMTY1OTc2NSwxOD
+A1MTU5MjQzXX0=
 -->
