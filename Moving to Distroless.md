@@ -71,9 +71,35 @@ While there can be further modifications and simplifications to the above Docker
 
 While using a distroless image build the container image, one does not have access to any shell commands and package manager binaries. In the above Dockerfile, the following commands would not work - `apk`, `mkdir`, `chmod`,`adduser`. These requirements have to be achieved by  using a stepped build. 
 
-The new Dockerfile that was
+The new Dockerfile that was used is as follows - 
+
+```shell
+  1 FROM python:3-slim AS build-env
+  2 RUN mkdir -p /app && mkdir -p /user/k8soper
+  3 ADD ./exportjson.py /app/exportjson.py
+  4 ADD ./dockerrun.sh /app/dockerrun.sh
+  5 ADD ./runhttp.py /app/runhttp.py
+  6 ADD ./execdockerrun.py /app/execdockerrun.py
+  7 RUN chmod +x /app/dockerrun.sh \
+  8  && chmod +x /app/runhttp.py \
+  9  && chmod +x /app/exportjson.py \
+ 10  && chmod +x /app/execdockerrun.py
+ 11 RUN pip3 install --upgrade pip \
+ 12     && pip3 install schedule \
+ 13     && pip3 install kubernetes
+ 14
+ 15 FROM gcr.io/distroless/python3
+ 16 COPY --from=build-env /user /user
+ 17 COPY --from=build-env /app /usr/local/bin
+ 18 COPY --from=build-env /usr/local/lib/python3.8/site-packages /usr/lib/python3.5/site-packages
+ 19 ENV PYTHONPATH=/usr/lib/python3.5/site-packages
+ 20 USER nonroot
+ 21 WORKDIR /user/k8soper
+ 22 EXPOSE 8080
+ 23 CMD ["/usr/local/bin/execdockerrun.py"]
+```
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTIxMzYwMDI5MjEsMTgyMTY1OTc2NSwxOD
-A1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMTY1OTk2ODQ4NSwxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
