@@ -111,10 +111,10 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
 * 20. By default, distroless has only 3 users -  `root`, `nonroot` and `nobody`. Since the image will be executed as a non root user, set the `USER` variable accordingly.
 * 21. Default home directory of `nonroot` is `/home/nonroot`. Since our application needs to work in `/user/k8soper` set the `WORKDIR` accordingly. 
 * 22. Expose the port 8080. 
-* 23.   
+* 23.   Distroless images by default do not contain a shell. That means the Dockerfile `ENTRYPOINT` command, when defined, must be specified in `vector` form, to avoid the container runtime prefixing with a shell. For the same reasons, if the entrypoint is left to the default empty vector, the CMD command should be specified in `vector` form
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbLTE5Mjk2NTg2MjUsMTgyMTY1OTc2NSwxOD
-A1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMTc5Mjg2OTg2LDE4MjE2NTk3NjUsMTgwNT
+E1OTI0M119
 -->
