@@ -63,8 +63,8 @@ USER k8soper
 WORKDIR /user/k8soper
 EXPOSE 8080
 CMD ["/usr/local/bin/dockerrun.sh"]
-
 ```
+
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbMjA3MjYwNDAwNywxODA1MTU5MjQzXX0=
+eyJoaXN0b3J5IjpbMjA2MDczNTM2MywxODA1MTU5MjQzXX0=
 -->
