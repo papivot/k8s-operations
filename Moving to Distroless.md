@@ -98,10 +98,11 @@ The new Dockerfile (with line numbers for reference below) that was used is as f
  22 EXPOSE 8080
  23 CMD ["/usr/local/bin/execdockerrun.py"]
 ```
-* 1. 
+* 1. We start with a temporary/build image - python:3-slim - that has all the relevent shell and Python package manager installed. Call it the `build-env`.
+* Create the necessary 
 
 
 <!--stackedit_data:
-eyJoaXN0b3J5IjpbOTE0MjkxNzA1LDE4MjE2NTk3NjUsMTgwNT
-E1OTI0M119
+eyJoaXN0b3J5IjpbLTk0ODkxNzU1OCwxODIxNjU5NzY1LDE4MD
+UxNTkyNDNdfQ==
 -->
