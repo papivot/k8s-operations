@@ -67,7 +67,7 @@ spec:
   selector:
     project.app: k8s-operations
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -146,15 +146,15 @@ metadata:
   name: k8s-operations
   namespace: kube-ops
   annotations:
-    kubernetes.io/ingress.class: traefik-internal
-    traefik.frontend.rule.type: "PathPrefixStrip"
-    ingress.kubernetes.io/custom-response-headers: "Strict-Transport-Security: max-age=31536000; includeSubDomains"
+    kubernetes.io/ingress.class: nginx
+    #    traefik.frontend.rule.type: "PathPrefixStrip"
+    #ingress.kubernetes.io/custom-response-headers: "Strict-Transport-Security: max-age=31536000; includeSubDomains"
   labels:
     project.name: k8s-operations
     project.app: k8s-operations
 spec:
   rules:
-    - host: cluster00.awscloud.navneetv.com 
+    - host: cluster00.navlab.io 
       http:
         paths:
           - path: /itam
