@@ -1,16 +1,16 @@
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: kube-ops
+  name: k8s-papivot-tools
   labels:
-    project.name: k8s-operations
-    project.app: k8s-operations
+    project.name: k8s-papivot-tools
+    project.app: k8s-papivot-tools
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: k8s-operations
-  namespace: kube-ops
+  namespace: k8s-papivot-tools
   labels:
     project.name: k8s-operations
     project.app: k8s-operations
@@ -46,7 +46,7 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: k8s-operations
-  namespace: kube-ops
+  namespace: k8s-papivot-tools
 ---
 apiVersion: v1
 kind: Service
@@ -57,7 +57,7 @@ metadata:
     project.app: k8s-operations
     project.name: k8s-operations
   name: k8s-operations
-  namespace: kube-ops
+  namespace: k8s-papivot-tools
 spec:
   ports:
     - name: http
@@ -66,16 +66,15 @@ spec:
       targetPort: 8080
   selector:
     project.app: k8s-operations
-  type: LoadBalancer
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
     project.name: k8s-operations
     project.app: k8s-operations
   name: k8s-operations
-  namespace: kube-ops
+  namespace: k8s-papivot-tools
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
@@ -97,9 +96,9 @@ spec:
       containers:
       - env:
         - name: CLUSTER_NAME
-          value: clustername.demo.local 
-        image: whoami6443/k8soper:0.1.7
-        imagePullPolicy: Always
+          value: navneet.cfcr.demo 
+        image: whoami6443/k8soper:0.0.7
+        imagePullPolicy: IfNotPresent
         name: k8s-operations
         ports:
         - containerPort: 8080
@@ -140,3 +139,48 @@ spec:
       serviceAccount: k8s-operations
       serviceAccountName: k8s-operations
       terminationGracePeriodSeconds: 30
+---
+#apiVersion: extensions/v1beta1
+#kind: Ingress
+#metadata:
+#  name: k8s-operations
+#  namespace: k8s-papivot-tools
+#  annotations:
+#    kubernetes.io/ingress.class: nginx
+    #    traefik.frontend.rule.type: "PathPrefixStrip"
+    #ingress.kubernetes.io/custom-response-headers: "Strict-Transport-Security: max-age=31536000; includeSubDomains"
+#  labels:
+#    project.name: k8s-operations
+#    project.app: k8s-operations
+#spec:
+#  rules:
+#    - host: cluster00.navlab.io 
+#      http:
+#        paths:
+#          - path: /itam
+#            backend:
+#              serviceName: k8s-operations
+#              servicePort: 80
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "contour"
+  name: k8s-operations
+  namespace: k8s-papivot-tools
+  labels:
+    project.name: k8s-operations
+    project.app: k8s-operations
+spec:
+  rules:
+  - host: cluster00.navlab.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: /itam
+        backend:
+          service:
+            name: k8s-operations
+            port:
+              number: 80
